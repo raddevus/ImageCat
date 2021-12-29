@@ -10,43 +10,43 @@ img:hover {
     box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
 }
 
+#clipboard {visibility:hidden;display:none;}
+
 .contextMenuItem:hover {background-color: #4281F4;color:white; }
 
-    .RADcontextMenu, .ESResultcontextMenu {z-index:1000;
-                      visibility:hidden;
-                      display:none;
-                      width:200px;
-                      height:100px;
-                      position:absolute;
-                      font-family:'Microsoft Sans Serif';
-                      font-size:11px;
-      }
+.RADcontextMenu {z-index:1000;
+                    visibility:hidden;
+                    display:none;
+                    width:200px;
+                    height:100px;
+                    position:absolute;
+                    font-family:'Microsoft Sans Serif';
+                    font-size:11px;
+    }
 
-    .RADcontextMenu ul, .ESResultcontextMenu ul {
-        /*width: 100%;  */
-        list-style-type: none; 
+.RADcontextMenu ul{
+    /*width: 100%;  */
+    list-style-type: none; 
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+        
+    }
+.RADcontextMenu li{
+        /*width:100%;*/
         margin: 0px 0px 0px 0px;
-        padding: 0px 0px 0px 0px;
-          
-        }
-    .RADcontextMenu li, .ESResultcontextMenu li {
-          /*width:100%;*/
-          margin: 0px 0px 0px 0px;
-          padding: 3px 0px 3px 15px;
-        }
-    .RADcontextMenu .card-body, .ESResultcontextMenu  .card-body{
-        width: 100%;
-        padding: 0px 0px 0px 0px;
-        margin: 0px 0px 0px 0px;
+        padding: 3px 0px 3px 15px;
+    }
+.RADcontextMenu .card-body{
+    width: 100%;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+}
 
-
-      }
-
-      .noselect {
-          -webkit-touch-callout: none;
-          -webkit-user-select: none;
-          -khtml-user-select: none;
-          -moz-user-select: none;
-          -ms-user-select: none;
-          user-select: none;
-      }
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

@@ -3,6 +3,7 @@ let imageUrl;
 let mousePos = {};
 let isContextMenuDisplayed = false;
 let currentHoverImageIdx = 0;
+let currentImageAddress = "";
 
 function initApp(){
   document.addEventListener("mousemove",onMouseMove,false);
@@ -46,11 +47,22 @@ function onContextMenuClick(e)
         displayImages();
         break;
       }
-    case 'last5files':
+    case 'copy_address':
       {
-        // $("#div2").load(hostRoot + "FtpActivity/GetRecentFiles?ftpConnectionId=" + userId + "&command=stor" + "&limit=5");
-        // initNewDraggable("div1", "div2");
-        // break;
+        // ### --- Because of limitations on copying to clipboard 
+        // ###     we have to copy from text input.
+        // ####    Since we don't want that 
+        let clipboard = document.querySelector("#clipboard");
+        clipboard.style.visibility = "visible";
+        clipboard.style.display = "block";
+        clipboard.value=currentImageAddress;
+        clipboard.select();
+        clipboard.setSelectionRange(0,1000);
+        document.execCommand("copy");
+        clipboard.style.visibility = "hidden";
+        clipboard.style.display = "none";
+
+        break;
       }
     case 'last5filesRETR':
       {
@@ -79,7 +91,6 @@ function hideContextMenu()
   if (isContextMenuDisplayed) {
       document.querySelector(".RADcontextMenu").style.visibility = "hidden";
       document.querySelector(".RADcontextMenu").style.display = "none";
-      //$('.ESResultcontextMenu').css({ 'visibility': 'hidden', 'display': 'none' });
       isContextMenuDisplayed = false;
     }
 }
@@ -107,7 +118,9 @@ function displayImages(){
             if (e.target.id !== null && e.target.id !== ""){
               // the image link id has format imgX where X is Index value
               currentHoverImageIdx = e.target.id.split("img")[1];
+              currentImageAddress = e.target.href;
               console.log(currentHoverImageIdx);
+              console.log(`currentImageAddress: ${currentImageAddress}`);
             }
         },false);
         imgLink.addEventListener('contextmenu', e => {
