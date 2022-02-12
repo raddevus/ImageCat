@@ -6,17 +6,37 @@ let currentHoverImageIdx = 0;
 let currentImageAddress = "";
 let userGuid = null;
 let password = null;
+var pwdModal = null;
 
 function initApp(){
-  getUserGuid();
+  
   document.addEventListener("mousemove",onMouseMove,false);
   document.addEventListener("click", bodyClickHandler,false);
+  let savePwdButton = document.querySelector("#savePwdButton");
+  savePwdButton.addEventListener("click", savePassword);
+  
+  getUserGuid();
+  getUserPassword();
   displayImages();
 }
 
 function onMouseMove(e)
 {
   mousePos = { x: e.clientX, y: e.clientY };
+}
+
+function savePassword(){
+  let pwd = document.querySelector("#password").value;
+  if (pwd === ""){
+    alert("Password cannot be blank.  Please provide a password.");
+    return;
+  }
+  if (pwd.length < 15){
+    alert("You must provide a password that is at least 15 characters long.");
+    return;
+  }
+  pwdModal.toggle();
+  password = pwd;
 }
 
 function drawContextMenu()
@@ -143,12 +163,21 @@ function displayImages(){
     }
 }
 
-function addImage(){
+function getUserPassword(){
   if (password == null){
-    var myModal = new bootstrap.Modal(document.querySelector('#exampleModal'), {
+    pwdModal = new bootstrap.Modal(document.querySelector('#pwdModal'), {
       keyboard: false
     })
-    myModal.toggle();
+    pwdModal.toggle();
+  }
+}
+
+function addImage(){
+  if (password == null){
+    var pwdModal = new bootstrap.Modal(document.querySelector('#pwdModal'), {
+      keyboard: false
+    })
+    pwdModal.toggle();
   }
   let allImages = JSON.parse(localStorage.getItem("allImg"));
 
