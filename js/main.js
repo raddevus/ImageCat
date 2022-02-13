@@ -189,6 +189,14 @@ function getUserPassword(){
 }
 
 function addImage(){
+  let localUrl = document.querySelector("#imageUrl").value.replaceAll(' ', '');
+
+  // A comnpletely blank (or all whitespace) URL is invalid
+  if (localUrl == null || localUrl == "") {
+    alert("Please provide a valid URL to the image.");
+    document.querySelector("#imageUrl").value="";
+    return;
+  }
   if (password == null){
     var pwdModal = new bootstrap.Modal(document.querySelector('#pwdModal'), {
       keyboard: false
@@ -200,7 +208,7 @@ function addImage(){
   if (allImages === null){
     allImages = [];
   }
- let localUrl = document.querySelector("#imageUrl").value ;
+ 
  allImages.push(localUrl);
   localStorage.setItem("allImg",JSON.stringify(allImages));
   document.querySelector("#imageUrl").value = "";
