@@ -6,18 +6,28 @@ let currentHoverImageIdx = 0;
 let currentImageAddress = "";
 let userGuid = null;
 let password = null;
-var pwdModal = null;
+let pwdModal = null;
 
 function initApp(){
   
   document.addEventListener("mousemove",onMouseMove,false);
   document.addEventListener("click", bodyClickHandler,false);
+  pwdModal = document.querySelector("#pwdModal");
+  pwdModal.addEventListener('hidden.bs.modal', () => {
+    if (password == null || password == ""){
+      alert("You must set a password to retrieve & decrypt/encrypt remote data. Please set a password & try again.");
+    }
+    else{
+      displayImages();
+      //retrieveRemoteData();
+    }
+  });
   let savePwdButton = document.querySelector("#savePwdButton");
   savePwdButton.addEventListener("click", savePassword);
   
   getUserGuid();
   getUserPassword();
-  displayImages();
+  
 }
 
 function onMouseMove(e)
@@ -118,6 +128,11 @@ function hideContextMenu()
     }
 }
 
+function retrieveRemoteData(){
+  
+  displayImages();
+}
+
 function displayImages(){
   
     let mainDiv = document.createElement("div");
@@ -170,6 +185,7 @@ function getUserPassword(){
     })
     pwdModal.toggle();
   }
+  
 }
 
 function addImage(){
