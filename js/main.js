@@ -56,7 +56,7 @@ function drawContextMenu()
   //console.log($('.EScontextMenu').text());
   document.querySelector('.RADcontextMenu').style.visibility = "visible";
   document.querySelector('.RADcontextMenu').style.display = "block";
-  document.querySelector('.RADcontextMenu').style.top = mousePos.y + "px";
+  document.querySelector('.RADcontextMenu').style.top = `${mousePos.y + window.scrollY}px`;
   document.querySelector('.RADcontextMenu').style.left = mousePos.x + "px";
 }
 
@@ -72,6 +72,7 @@ function onContextMenuClick(e)
       {
         // load all localStorage images into array.
         let allImg = JSON.parse(localStorage.getItem("allImg"));
+
         // remove targeted item
         allImg.splice(currentHoverImageIdx,1);
         // store updated array to localStorage
@@ -94,7 +95,6 @@ function onContextMenuClick(e)
         document.execCommand("copy");
         clipboard.style.visibility = "hidden";
         clipboard.style.display = "none";
-
         break;
       }
     case 'last5filesRETR':
