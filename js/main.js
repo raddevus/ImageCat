@@ -71,10 +71,12 @@ function onContextMenuClick(e)
     case 'delete_item':
       {
         // load all localStorage images into array.
-        let allImg = JSON.parse(localStorage.getItem("allImg"));
+        let allImg = JSON.parse(localStorage.getItem("allImg")).reverse();
 
         // remove targeted item
         allImg.splice(currentHoverImageIdx,1);
+        //after removing, reverse the images again for storage.
+        allImg = allImg.reverse();
         // store updated array to localStorage
         localStorage.setItem("allImg",JSON.stringify(allImg));
         removeMainDiv();
@@ -139,7 +141,8 @@ function displayImages(){
     mainDiv.id="mainDiv";
     document.body.appendChild(mainDiv);
 
-    let allSavedImages = JSON.parse(localStorage.getItem("allImg"));
+    // Display the newest added images at the top of the page (reverse order they were added in)
+    let allSavedImages = JSON.parse(localStorage.getItem("allImg")).reverse();
 
     if (allSavedImages === null){allSavedImages=[];}
 
